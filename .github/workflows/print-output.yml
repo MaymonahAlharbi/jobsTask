@@ -1,0 +1,26 @@
+---
+    name: Jobs-name
+    
+    on: 
+      push: 
+        branches:
+          main
+    
+    
+    jobs:
+
+        job-1:
+            name: print-job-name
+            runs-on: ubuntu-latest
+        
+            steps:
+              - name: print name
+                run: echo "This Job One"
+            
+        job-2:
+            name: print-job-name-two
+            runs-on: ubuntu-latest
+        
+            steps:
+              - name: print name
+                run: echo "This is Job Two"

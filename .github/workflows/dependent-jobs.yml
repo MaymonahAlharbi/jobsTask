@@ -1,0 +1,34 @@
+---
+    name: Jobs-name
+    
+    on: 
+      push: 
+        branches:
+          main
+    
+    
+    jobs:
+
+        job-1:
+            name: print-my-name
+            runs-on: ubuntu-latest
+        
+            outputs:
+                output1: ${{ steps.step1.outputs.test }}
+                output2: ${{ steps.step2.outputs.test }}
+            steps:
+                - id: step1
+                  run: echo "test=Maymonah" >> "$GITHUB_OUTPUT"
+                - id: step2
+                  run: echo "test=Alharbi" >> "$GITHUB_OUTPUT"
+            
+        job-2:
+            name: read-my-name
+            runs-on: ubuntu-latest
+            needs: job-1
+        
+            steps:
+                - env:
+                    OUTPUT1: ${{needs.job-1.outputs.output1}}
+                    OUTPUT2: ${{needs.job-1.outputs.output2}}
+                  run: echo "$OUTPUT1 $OUTPUT2"
